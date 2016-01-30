@@ -36,8 +36,8 @@
     </appender>
 
     <logger name="ru.sam.dukbone" level="DEBUG"/>
-    <logger name="org.springframework" level="DEBUG"/>
-    <logger name="org.hibernate" level="DEBUG"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
     <!--<logger name="org.springframework.security" level="DEBUG"/>-->
 
     <root level="INFO">

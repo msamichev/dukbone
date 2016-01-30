@@ -17,12 +17,13 @@ public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
+        LOG.debug("redirect from root to welcome");
         return "redirect:welcome";
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public ModelAndView welcome(Model model) {
-        LOG.info("move to welcome page");
+        LOG.debug("move to welcome page");
         ModelAndView modelAndView = new ModelAndView("welcome");
         return modelAndView;
     }
