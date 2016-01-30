@@ -10,6 +10,7 @@
         <property name="DUKBONE_HOME" value="C:/prj/DukBone/project/dukbone" />
     -->
 
+    <!-- DUKBONE_HOME is System env variable. Needed set in the system -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${DUKBONE_HOME}/logs/dukbone.log</file>
 
@@ -35,9 +36,9 @@
     </appender>
 
     <logger name="ru.sam.dukbone" level="DEBUG"/>
-    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.hibernate" level="DEBUG"/>
     <!--<logger name="org.springframework.security" level="DEBUG"/>-->
-    <logger name="org.hibernate" level="ERROR"/>
 
     <root level="INFO">
         <appender-ref ref="file"/>

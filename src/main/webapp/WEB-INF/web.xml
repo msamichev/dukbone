@@ -10,13 +10,9 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    <!--
-        <context-param>
-            <param-name>spring.profiles.default</param-name>
-            <param-value>postgres,datajpa</param-value>
-        </context-param>
-    -->
 
+
+    <!-- Parameters with Spring app context for ContextLoaderListener -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -27,21 +23,11 @@
         </param-value>
     </context-param>
 
-    <context-param>
-        <param-name>logback.configurationFile</param-name>
-        <param-value>${DUKBONE_HOME}/conf/logback.xml</param-value>
-    </context-param>
-
-
-    <!-- Listener for logback configuration-->
-    <listener>
-        <listener-class>ru.sam.dukbone.config.ConfigContextLoaderListener</listener-class>
-    </listener>
-
     <!-- Listener for Spring context configuration-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
 
     <!-- Character encoding filter -->
     <!-- Reads request input using UTF-8 encoding -->
