@@ -24,6 +24,8 @@ public class RootController {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public ModelAndView welcome(Model model) {
         LOG.debug("move to welcome page");
+
+        model.addAttribute("object","Test string");
         ModelAndView modelAndView = new ModelAndView("welcome");
         return modelAndView;
     }

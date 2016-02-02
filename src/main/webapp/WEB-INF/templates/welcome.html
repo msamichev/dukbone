@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome page</title>
+</head>
+<body>
+<h1>Welcome to My new Project!!!</h1>
+
+<p th:text="#{app.title}">Welcome!</p>
+<p th:text="${#messages.msg('app.title')}">Welcome!</p>
+
+<p th:text="${object}">Welcome!</p>
+
+<p>Please select an option</p>
+<ol>
+    <li><a href="product/list.html" th:href="@{/product/list}">Product List</a></li>
+    <li><a href="order/list.html" th:href="@{/order/list}">Order List</a></li>
+    <li><a href="subscribe.html" th:href="@{/subscribe}">Subscribe to our Newsletter</a></li>
+    <li><a href="userprofile.html" th:href="@{~/userprofile}">See User Profile</a></li>
+</ol>
+
+<div th:if="true == false"> test1</div>
+<div th:if="${true == false}"> test2</div>
+<div th:if="false == false"> test3</div>
+<div th:if="${false == false}"> test4</div>
+
+<div th:if="1 &gt; 1"  th:text="test5">test5 stub</div>
+<div th:if="${2 == 1}"  th:text="test6">test6 stub</div>
+<div th:if="${2 > 1}"  th:text="test7">test7 stub</div>
+
+<h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>
+<h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>
+<h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>
+<h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>
+<span>+1</span>
+</body>
+</html>

@@ -98,6 +98,13 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
+        <!-- Thymeleaf-->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -140,6 +147,8 @@
         <spring.version>4.2.4.RELEASE</spring.version>
         <spring-data.version>Gosling-RELEASE</spring-data.version>
 
+        <!-- Thymeleaf -->
+        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
 
     </properties>
 

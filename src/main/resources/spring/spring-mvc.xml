@@ -3,16 +3,56 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-       <context:component-scan base-package="ru.sam.dukbone.web"/>
+    <!-- **************************************************************** -->
+    <!--  SPRING ANNOTATION PROCESSING                                    -->
+    <!-- **************************************************************** -->
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="ru.sam.dukbone.web"/>
 
-       <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-              <property name="prefix" value="/WEB-INF/views/"/>
-              <property name="suffix" value=".jsp"/>
-       </bean>
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+    <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
 
+    <!-- **************************************************************** -->
+    <!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+    <!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+    <!-- **************************************************************** -->
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/"/>
+        <property name="suffix" value=".html"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
+    </bean>
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+    </bean>
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
 
+    <!-- **************************************************************** -->
+    <!--  MESSAGE EXTERNALIZATION/INTERNATIONALIZATION                    -->
+    <!--  Standard Spring MessageSource implementation                    -->
+    <!-- **************************************************************** -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8"
+          p:basename="/i18n/messages"/>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+          p:defaultLocale="ru"/>
+
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+              p:paramName="lang"/>
+    </mvc:interceptors>
 
 </beans>
