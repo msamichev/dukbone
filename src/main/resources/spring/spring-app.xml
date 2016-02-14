@@ -2,11 +2,38 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+    <context:property-placeholder location="file:${DUKBONE_HOME}/conf/dukbone.properties" ignore-unresolvable="true"/>
 
     <context:annotation-config/>
 
     <context:component-scan base-package="ru.sam.dukbone.service"/>
+
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="ru.sam.dukbone.util.converter.StringToLocalDateTimeConverter"
+                      p:datePattern="${date_time_format}"/>
+            </set>
+        </property>
+        <property name="formatters">
+            <set>
+                <bean class="ru.sam.dukbone.util.formatter.DateTimeFormatter"
+                      p:datePattern="${date_time_format}"/>
+            </set>
+        </property>
+    </bean>
+
+
+    <!-- REMOVE-->
+    <bean id="test" class="ru.sam.dukbone.Contact"
+          p:firstName="Clarence"
+          p:lastName="Ho"
+          p:birthDate="09.09.1978 00:00"
+          p:personalSite="http://www.clarence.com"
+            />
 
 </beans>

@@ -6,17 +6,47 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <!-- **************************************************************** -->
+    <!--  PROPERTIES                                                -->
+    <!-- **************************************************************** -->
+    <context:property-placeholder location="file:${DUKBONE_HOME}/conf/dukbone.properties" ignore-unresolvable="true"/>
+
+    <!-- **************************************************************** -->
+    <!--  STATIC RESOURCES                                                -->
+    <!-- **************************************************************** -->
+    <!-- Use spring servlet for all requests, including static resources -->
+    <mvc:default-servlet-handler/>
+    <!--OR-->
+    <!-- All resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP or HTML files -->
+    <!--<mvc:resources mapping="/resources/**" location="/resources/"/>-->
 
     <!-- **************************************************************** -->
     <!--  SPRING ANNOTATION PROCESSING                                    -->
     <!-- **************************************************************** -->
+    <!-- Use @MVC annotations -->
     <mvc:annotation-driven/>
+    <!-- User @Controller, @Service... annotations -->
     <context:component-scan base-package="ru.sam.dukbone.web"/>
 
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-    <!--<property name="prefix" value="/WEB-INF/views/"/>-->
-    <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
+    <!-- **************************************************************** -->
+    <!--  CONVERSION SERVICE                                              -->
+    <!--  Standard Spring formatting-enabled implementation               -->
+    <!-- **************************************************************** -->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="ru.sam.dukbone.util.formatter.DateTimeFormatter"
+                      p:datePattern="${date_time_format}"/>
+            </set>
+        </property>
+        <!--<property name="converters">-->
+            <!--<set>-->
+                <!--<bean class="ru.sam.dukbone.util.converter.StringToLocalDateTimeConverter"-->
+                      <!--p:datePattern="${date_time_format}"/>-->
+            <!--</set>-->
+        <!--</property>-->
+    </bean>
 
     <!-- **************************************************************** -->
     <!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
@@ -32,6 +62,13 @@
     <bean id="templateEngine"
           class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
+        <property name="additionalDialects">
+            <set value-type="org.thymeleaf.dialect.IDialect">
+                <bean class="org.thymeleaf.extras.java8time.dialect.Java8TimeDialect"/>
+                <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>
+                <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+            </set>
+        </property>
     </bean>
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine"/>
@@ -46,10 +83,8 @@
           p:cacheSeconds="60"
           p:defaultEncoding="UTF-8"
           p:basename="/i18n/messages"/>
-
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
-          p:defaultLocale="ru"/>
-
+          p:defaultLocale="${locale}"/>
     <mvc:interceptors>
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
               p:paramName="lang"/>
