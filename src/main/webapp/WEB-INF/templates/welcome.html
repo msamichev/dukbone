@@ -2,49 +2,209 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/layout"
-      layout:decorator="layout">
+      layout:decorator="layouts/layout">
 <head>
-    <title>Welcome page</title>
+    <block th:remove="all">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <!--<link rel="icon" href="../../favicon.ico"/>-->
+
+        <title>Welcome page</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.min.css}"
+              href="../../resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap-theme.min.css}"
+              href="../../resources/bootstrap/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" th:href="@{/resources/app/css/dukbone.css}"
+              href="../../resources/app/css/dukbone.css"/>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script th:src="@{/resources/jquery/jquery-1.12.0.js}" src="../../resources/jquery/jquery-1.12.0.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script th:src="@{/resources/bootstrap/js/bootstrap.min.js}"
+                src="../../resources/bootstrap/js/bootstrap.min.js"></script>
+    </block>
 </head>
+
+
 <body>
-<div layout:fragment="content">
-    <h1>Welcome to My new Project!!!</h1>
 
-    <p th:text="#{app.title}">Welcome!</p>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
 
-    <p th:text="${#messages.msg('app.title')}">Welcome!</p>
+<!-- Begin page content -->
+<div layout:fragment="content" class="container">
+    <div class="page-header">
+        <h1>Sticky footer with fixed navbar</h1>
+    </div>
+    <p>
+        Nulla interdum nunc id lacinia rhoncus. Cras rhoncus suscipit arcu eu consequat. Praesent consectetur odio
+        varius rhoncus facilisis. Praesent luctus ligula nec massa aliquet ullamcorper. Phasellus ac risus rhoncus,
+        aliquam augue vel, porttitor enim. Nam non pellentesque libero. Etiam id dolor nec quam consequat rhoncus.
+        Quisque iaculis semper lectus a congue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+        ridiculus mus. Mauris nulla augue, viverra non sem vel, condimentum aliquet neque. Proin ullamcorper risus quam.
+    </p>
 
-    <p th:text="${object}">Welcome!</p>
+    <p>
+        Donec ac dignissim ipsum. Morbi eget risus tempus, fringilla nulla sit amet, fermentum nibh. Donec sit amet
+        tortor pulvinar ex tincidunt scelerisque. Pellentesque vestibulum nisi a rutrum pharetra. Nulla velit massa,
+        consequat ut egestas in, faucibus in orci. Mauris a tellus quam. Nulla non risus arcu. Nam elementum laoreet
+        justo eu accumsan. Sed nec tortor rhoncus, feugiat libero et, pretium nulla. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Phasellus vulputate urna a odio laoreet, non rhoncus mauris hendrerit. In sed purus
+        dictum, condimentum nunc molestie, tincidunt urna. Fusce eget dolor et quam faucibus viverra. Maecenas
+        pellentesque interdum justo, id ultricies turpis luctus nec. Praesent gravida dignissim vestibulum.
+    </p>
 
-    <p>Please select an option</p>
-    <ol>
-        <li><a href="product/list.html" th:href="@{/product/list}">Product List</a></li>
-        <li><a href="order/list.html" th:href="@{/order/list}">Order List</a></li>
-        <li><a href="subscribe.html" th:href="@{/subscribe}">Subscribe to our Newsletter</a></li>
-        <li><a href="userprofile.html" th:href="@{../userprofile}">See User Profile1</a></li>
-        <li><a href="userprofile.html" th:href="@{~/userprofile}">See User Profile2</a></li>
-    </ol>
+    <p>
+        Phasellus vehicula varius lorem, eu blandit velit lobortis vel. Mauris in vehicula leo, et consectetur nisl.
+        Nullam sed dolor dapibus, consequat nunc ut, feugiat lorem. Donec accumsan vitae purus sit amet ullamcorper.
+        Praesent eget mattis sem. Vestibulum convallis, nulla vitae facilisis egestas, lectus justo porta nisi, in
+        efficitur erat eros quis turpis. Nunc vulputate mauris eu nunc aliquet, consequat tincidunt risus iaculis. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent vel ex viverra,
+        accumsan libero id, bibendum eros. Nullam lobortis malesuada mauris, vitae dignissim odio accumsan et. Cras
+        metus metus, laoreet blandit mattis eu, varius et enim. Cras gravida tellus et lorem consequat porta. Aenean
+        vitae leo sagittis, lobortis turpis sed, efficitur eros. Suspendisse feugiat dui vel dui dictum finibus.
+    </p>
 
-    <div th:if="true == false"> test1</div>
-    <div th:if="${true == false}"> test2</div>
-    <div th:if="false == false"> test3</div>
-    <div th:if="${false == false}"> test4</div>
+    <p>
+        Nullam fermentum mauris eget justo cursus pellentesque. Aenean volutpat quis diam aliquam fringilla. Suspendisse
+        sodales accumsan neque, quis fringilla magna vestibulum id. Nam eu elementum urna. Aenean tincidunt commodo
+        tortor elementum vulputate. Aenean auctor sit amet turpis nec interdum. Maecenas id semper ante, ac feugiat
+        nisl. Etiam at facilisis dolor, et ullamcorper lectus. Morbi ut condimentum lectus. Nunc nec venenatis nulla.
+        Maecenas venenatis, lectus non maximus accumsan, enim purus cursus mi, quis posuere augue arcu vel eros.
+        Pellentesque dignissim molestie lacus quis porttitor. Pellentesque nec lectus vitae est iaculis pretium. Nullam
+        ornare, lacus sit amet rutrum pharetra, risus elit pretium quam, a rhoncus lacus lorem eget nisl.
+    </p>
 
-    <div th:if="1 &gt; 1" th:text="test5">test5 stub</div>
-    <div th:if="${2 == 1}" th:text="test6">test6 stub</div>
-    <div th:if="${2 > 1}" th:text="test7">test7 stub</div>
+    <p>
+        Sed elit mauris, dapibus ac sem ac, rutrum cursus erat. Quisque auctor dictum felis, sit amet sodales tortor
+        dictum sit amet. Proin vel iaculis purus, a tempus metus. Mauris vel ornare tellus. Suspendisse semper
+        scelerisque posuere. Quisque mollis dignissim porta. Curabitur arcu diam, consequat non mollis at, malesuada ac
+        turpis. Praesent vehicula nec nisl a accumsan.
+    </p>
 
-    <h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>
+    <p>
+        Donec nec arcu lacinia, elementum dui et, vehicula justo. Quisque scelerisque in nibh vitae efficitur. Etiam
+        eget varius enim. Integer accumsan efficitur tristique. Aenean pulvinar laoreet tristique. In ullamcorper, nunc
+        non convallis aliquam, quam augue aliquam urna, non aliquet justo tortor quis urna. Sed rhoncus varius erat, vel
+        laoreet enim vehicula eu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque eu tortor eget
+        ex finibus scelerisque sit amet in libero.
+    </p>
 
-    <h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>
+    <p>
+        Donec ipsum ex, condimentum vel purus at, accumsan vulputate dolor. Morbi laoreet porttitor consectetur.
+        Vestibulum sit amet augue non ante condimentum sagittis quis eget justo. Vestibulum vitae elit vel lorem auctor
+        eleifend ut vel nibh. Praesent aliquam tortor et nunc interdum, vel finibus felis consequat. Cras vitae felis
+        eleifend turpis ultrices aliquet. Suspendisse vestibulum id nulla eu dictum.
+    </p>
 
-    <h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>
+    <p>
+        Pellentesque tellus nisl, rutrum eu nunc ac, vestibulum egestas eros. Ut ultrices at sem non facilisis. Donec
+        quis massa dapibus, blandit risus id, hendrerit felis. Morbi ut ex malesuada, cursus massa quis, viverra enim.
+        Vivamus porttitor laoreet dignissim. Vivamus sit amet lorem viverra, faucibus ante sit amet, auctor odio.
+        Curabitur ut metus sed velit tincidunt sagittis. Fusce at elementum purus, id iaculis enim. Quisque non ex
+        finibus, semper risus sit amet, laoreet justo. Maecenas vel eros a lacus blandit vulputate ac eget leo. Sed diam
+        nibh, porta ut eleifend quis, viverra non quam.
+    </p>
 
-    <h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>
-
-    <div th:text="${#dates.format(#dates.createNow(),'dd/MMM/yyyy HH:mm')}"> test</div>
-    <div th:inline="text">[[${#temporals.createNow()}]]</div>
-
+    <p>
+        Mauris euismod pellentesque nisl, eu bibendum augue. Duis et sollicitudin sapien, ut posuere dolor. Sed
+        convallis metus quis est sollicitudin tempus. Nulla sed ipsum est. Nam accumsan ipsum vitae fermentum volutpat.
+        Cras quis sodales dolor, eget scelerisque diam. Maecenas tincidunt ante nisi, ac venenatis eros posuere vitae.
+        Vestibulum eu lobortis ex. Mauris a lacinia augue. Aenean tempor nunc at enim dapibus, aliquam porta diam
+        euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus
+        sit amet lectus euismod, lobortis odio vel, condimentum risus. Nunc nisl libero, efficitur egestas ante a,
+        eleifend tincidunt turpis. Quisque aliquet, orci quis sodales cursus, ex sem rhoncus urna, sed dapibus felis
+        ipsum vitae quam. Duis auctor, justo sit amet blandit pellentesque, ligula arcu dapibus odio, eleifend volutpat
+        velit massa vitae ante. Suspendisse potenti.
+    </p>
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+    </div>
+</footer>
+
+
+<!--<div layout:fragment="content">-->
+<!--<h1>Welcome to My new Project!!!</h1>-->
+
+<!--<p th:text="#{app.title}">Welcome!</p>-->
+
+<!--<p th:text="${#messages.msg('app.title')}">Welcome!</p>-->
+
+<!--<p th:text="${object}">Welcome!</p>-->
+
+<!--<p>Please select an option</p>-->
+<!--<ol>-->
+<!--<li><a href="product/list.html" th:href="@{/product/list}">Product List</a></li>-->
+<!--<li><a href="order/list.html" th:href="@{/order/list}">Order List</a></li>-->
+<!--<li><a href="subscribe.html" th:href="@{/subscribe}">Subscribe to our Newsletter</a></li>-->
+<!--<li><a href="userprofile.html" th:href="@{../userprofile}">See User Profile1</a></li>-->
+<!--<li><a href="userprofile.html" th:href="@{~/userprofile}">See User Profile2</a></li>-->
+<!--</ol>-->
+
+<!--<div th:if="true == false"> test1</div>-->
+<!--<div th:if="${true == false}"> test2</div>-->
+<!--<div th:if="false == false"> test3</div>-->
+<!--<div th:if="${false == false}"> test4</div>-->
+
+<!--<div th:if="1 &gt; 1" th:text="test5">test5 stub</div>-->
+<!--<div th:if="${2 == 1}" th:text="test6">test6 stub</div>-->
+<!--<div th:if="${2 > 1}" th:text="test7">test7 stub</div>-->
+
+<!--<h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>-->
+
+<!--<h3 th:inline="text">[[${#ids.seq('someId')}]]</h3>-->
+
+<!--<h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>-->
+
+<!--<h3 th:inline="text">[[${#ids.seq('someNewId')}]]</h3>-->
+
+<!--<div th:text="${#dates.format(#dates.createNow(),'dd/MMM/yyyy HH:mm')}"> test</div>-->
+<!--<div th:inline="text">[[${#temporals.createNow()}]]</div>-->
+
+<!--</div>-->
+
+
 </body>
 </html>

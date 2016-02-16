@@ -144,6 +144,19 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>${thymeleaf-layout-dialect.version}</version>
         </dependency>
+
+        <!-- JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -192,6 +205,9 @@
         <thymeleaf.java8time.version>2.1.0.RELEASE</thymeleaf.java8time.version>
         <thymeleaf-springsecurity3.version>2.1.2.RELEASE</thymeleaf-springsecurity3.version>
         <thymeleaf-layout-dialect.version>1.3.1</thymeleaf-layout-dialect.version>
+
+        <!-- JSON-->
+        <jackson.version>2.7.1</jackson.version>
 
     </properties>
 
